@@ -16,6 +16,7 @@ import { stylePrompts } from '@/ai/styles/prompts';
 import NavBar from '@/components/navbar';
 import MobileHelper from '@/components/mobile-helper';
 import MobileImageViewer from '@/components/mobile-image-viewer';
+import { trackImageTransformation } from '@/utils/analytics';
 
 const STYLES = Object.values(stylePrompts).map(style => style.name);
 
@@ -79,6 +80,9 @@ export default function ArtifyPage() {
 
     setIsLoading(true);
     setTransformedImage(null); 
+    
+    // Track start time for calculating duration
+    const startTime = performance.now();
 
     try {
       // Resize image if it's too large
@@ -91,6 +95,10 @@ export default function ArtifyPage() {
       const result = await generateStyledImage(input);
       setTransformedImage(result.transformedImage);
       toast({ title: "Artified!", description: "Your image has been transformed." });
+      
+      // Calculate duration and track the transformation event
+      const duration = performance.now() - startTime;
+      trackImageTransformation(selectedStyle, Math.round(duration));
     } catch (error) {
       console.error("Transformation error:", error);
       const errorMessage = error instanceof Error ? error.message : "An unknown error occurred during transformation.";

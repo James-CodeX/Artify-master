@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent } from '@/components/ui/card';
+import { trackFileUpload } from '@/utils/analytics';
 
 interface ImageUploaderProps {
   onImageUpload: (imageDataUrl: string) => void;
@@ -25,6 +26,9 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUpload, previewIma
         const dataUrl = e.target?.result as string;
         onImageUpload(dataUrl);
         toast({ title: "Image Loaded", description: "Your image has been successfully loaded." });
+        
+        // Track the file upload event
+        trackFileUpload(file.type, file.size);
       };
       reader.onerror = () => {
         toast({ variant: "destructive", title: "Error", description: "Failed to read the image file." });
