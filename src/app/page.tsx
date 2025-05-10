@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { generateStyledImage, type GenerateStyledImageInput } from '@/ai/flows/generate-styled-image';
+import { generateWithFreshInstance, type FreshInstanceInput } from '@/ai/freshInstanceService';
 import { resizeImage } from '@/utils/imageProcessing';
 import { Wand2, Info, ArrowDown, Camera, Image, Mail, Phone, MapPin } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -89,13 +90,13 @@ export default function ArtifyPage() {
       // Resize image if it's too large
       const resizedImage = await resizeImage(originalImage, 2); // Max 2MB
       
-      const input: GenerateStyledImageInput = {
+      const input: FreshInstanceInput = {
         photoDataUri: resizedImage,
         style: getStyleKey(selectedStyle),
       };
       
-      // Always make a fresh API request
-      const result = await generateStyledImage(input);
+      // Always use fresh instance for each request
+      const result = await generateWithFreshInstance(input);
       setTransformedImage(result.transformedImage);
       toast({ title: "Artified!", description: "Your image has been transformed." });
       
