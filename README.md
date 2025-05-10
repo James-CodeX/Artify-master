@@ -15,9 +15,8 @@ Artify is an AI-powered web application that transforms ordinary photos into stu
 - **Secure Processing**: All image processing happens on secure servers
 
 ## 🖼️ Demo
+![image](https://github.com/user-attachments/assets/c339d078-f137-4a80-9092-68588cba3580)
 
-![original](/public/orginal.jpg)
-![Artified Demo](/public/artified-cartoon (1).png)
 
 ## 🚀 Getting Started
 
