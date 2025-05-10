@@ -5,6 +5,7 @@ import './globals.css';
 import './mobile.css';
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from '@/lib/theme-provider';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'Artify - Transform Your Photos',
@@ -59,6 +60,16 @@ export default function RootLayout({
           {children}
           <Toaster />
         </ThemeProvider>
+        {/* Google Analytics */}
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-G0FF8MW8RD" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-G0FF8MW8RD');
+          `}
+        </Script>
       </body>
     </html>
   );
