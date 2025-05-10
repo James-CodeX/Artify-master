@@ -371,15 +371,15 @@ export default function ArtifyPage() {
               <CardContent className="space-y-4">
                 <div className="flex items-center gap-3">
                   <Mail className="h-5 w-5 text-primary" />
-                  <p className="text-foreground/80">contact@artify.example.com</p>
+                  <p className="text-foreground/80">amazingjimmy44@gmail.com</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="h-5 w-5 text-primary" />
-                  <p className="text-foreground/80">+1 (555) 123-4567</p>
+                  <p className="text-foreground/80">+254 114 858561</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <MapPin className="h-5 w-5 text-primary" />
-                  <p className="text-foreground/80">123 Art Street, Creative City, AC 12345</p>
+                  <p className="text-foreground/80">Nairobi, Kenya</p>
                 </div>
               </CardContent>
             </Card>

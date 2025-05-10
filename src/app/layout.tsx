@@ -11,13 +11,13 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/artify.svg',
-        href: '/artify.svg',
+        url: '/favicon.svg',
+        href: '/favicon.svg',
       }
     ],
     apple: {
-      url: '/artify.svg',
-      href: '/artify.svg',
+      url: '/logo.svg',
+      href: '/logo.svg',
     },
   },
 };
@@ -50,7 +50,7 @@ export default function RootLayout({
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
       <head>
         <ThemeScript />
-        <link rel="icon" href="/artify.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body className={`font-sans antialiased`}>
         <ThemeProvider defaultTheme="system">
