@@ -10,11 +10,11 @@ export const stylePrompts: Record<string, StylePrompt> = {
   },
   cartoon: {
     name: 'Cartoon',
-    prompt: 'Transform the given image into a vibrant cartoon style. The main subject should be stylized with bold lines, simplified forms, and bright, solid colors. The style should maintain the character\'s key features while adding a playful, animated quality. The background should be simplified and colorful in a complementary cartoon style.',
+    prompt: 'Transform the given image into a cartoon style'
   },
   ghibli: {
     name: 'Studio Ghibli',
-    prompt: 'Transform the given image into the distinctive Studio Ghibli animation style. The image should have soft, painterly qualities with attention to lighting and atmosphere. Use the characteristic Ghibli color palette with emphasis on natural elements. The style should capture the warmth and detail typical of Ghibli films while maintaining the subject\'s core features.',
+    prompt: 'Transform the given image into the Ghibli style',
   },
   // Add more styles as needed
 };
