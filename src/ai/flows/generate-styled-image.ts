@@ -9,7 +9,8 @@
  */
 
 import {ai} from '@/ai/genkit';
-import {z} from 'genkit'; 
+import {z} from 'genkit';
+import {getStylePrompt} from '../styles/prompts';
 
 const GenerateStyledImageInputSchema = z.object({
   photoDataUri: z
@@ -60,7 +61,7 @@ const generateStyledImagePrompt = ai.definePrompt(
       return [
         {media: {url: photoDataUri, contentType: contentType}},
         {
-          text: `Transform the given image into a ${input.style} style. The main subject of the image should be clearly visible and well-defined in the chosen style. The background should complement the style and subject. Ensure the output is only the transformed image.`,
+          text: getStylePrompt(input.style),
         },
       ];
     },

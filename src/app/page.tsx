@@ -11,9 +11,9 @@ import { useToast } from '@/hooks/use-toast';
 import { generateStyledImage, type GenerateStyledImageInput } from '@/ai/flows/generate-styled-image';
 import { Wand2, Info } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { stylePrompts } from '@/ai/styles/prompts';
 
-
-const STYLES = ["Outline Sketch", "Ghibli Animation", "Cartoon Character", "Pixel Art", "Impressionist Painting", "Sci-Fi Concept Art", "Vintage Photo"];
+const STYLES = Object.values(stylePrompts).map(style => style.name);
 
 export default function ArtifyPage() {
   const [originalImage, setOriginalImage] = useState<string | null>(null);
@@ -26,9 +26,17 @@ export default function ArtifyPage() {
     console.log("Artify page loaded and ready.");
   }, []);
 
+  const getStyleKey = (displayName: string) => {
+    return Object.entries(stylePrompts).find(([_, style]) => style.name === displayName)?.[0] || '';
+  };
+
   const handleImageUpload = useCallback((imageDataUrl: string) => {
     setOriginalImage(imageDataUrl);
     setTransformedImage(null); 
+  }, []);
+
+  const handleStyleChange = useCallback((style: string) => {
+    setSelectedStyle(style);
   }, []);
 
   const handleTransformImage = useCallback(async () => {
@@ -43,7 +51,7 @@ export default function ArtifyPage() {
     try {
       const input: GenerateStyledImageInput = {
         photoDataUri: originalImage,
-        style: selectedStyle,
+        style: getStyleKey(selectedStyle),
       };
       const result = await generateStyledImage(input);
       setTransformedImage(result.transformedImage);
