@@ -1,6 +1,6 @@
 # Artify: Transform Photos Into Art with AI 🎨
 
-![Artify Logo](/public/logo.png)
+![Artify Logo](/public/logo.svg)
 
 Artify is an AI-powered web application that transforms ordinary photos into stunning artworks in various artistic styles. Simply upload a photo, choose a style, and watch as artificial intelligence reimagines your image into a beautiful work of art.
 
@@ -16,7 +16,8 @@ Artify is an AI-powered web application that transforms ordinary photos into stu
 
 ## 🖼️ Demo
 
-![Artify Demo](/public/demo.png)
+![original](/public/orginal.jpg)
+![Artified Demo](/public/artified-cartoon (1).png)
 
 ## 🚀 Getting Started
 
