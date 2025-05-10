@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { generateStyledImage, type GenerateStyledImageInput } from '@/ai/flows/generate-styled-image';
+import { resizeImage } from '@/utils/imageProcessing';
 import { Wand2, Info } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { stylePrompts } from '@/ai/styles/prompts';
@@ -49,8 +50,11 @@ export default function ArtifyPage() {
     setTransformedImage(null); 
 
     try {
+      // Resize image if it's too large
+      const resizedImage = await resizeImage(originalImage, 2); // Max 2MB
+      
       const input: GenerateStyledImageInput = {
-        photoDataUri: originalImage,
+        photoDataUri: resizedImage,
         style: getStyleKey(selectedStyle),
       };
       const result = await generateStyledImage(input);
