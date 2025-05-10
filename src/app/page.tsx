@@ -78,6 +78,7 @@ export default function ArtifyPage() {
       return;
     }
 
+    // Always reset loading state and transformed image when starting a new request
     setIsLoading(true);
     setTransformedImage(null); 
     
@@ -92,6 +93,8 @@ export default function ArtifyPage() {
         photoDataUri: resizedImage,
         style: getStyleKey(selectedStyle),
       };
+      
+      // Always make a fresh API request
       const result = await generateStyledImage(input);
       setTransformedImage(result.transformedImage);
       toast({ title: "Artified!", description: "Your image has been transformed." });
