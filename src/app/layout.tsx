@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import './globals.css';
+import './mobile.css';
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from '@/lib/theme-provider';
 
@@ -51,6 +52,7 @@ export default function RootLayout({
       <head>
         <ThemeScript />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
       </head>
       <body className={`font-sans antialiased`}>
         <ThemeProvider defaultTheme="system">

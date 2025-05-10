@@ -14,6 +14,8 @@ import { Wand2, Info, ArrowDown, Camera, Image, Mail, Phone, MapPin } from 'luci
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { stylePrompts } from '@/ai/styles/prompts';
 import NavBar from '@/components/navbar';
+import MobileHelper from '@/components/mobile-helper';
+import MobileImageViewer from '@/components/mobile-image-viewer';
 
 const STYLES = Object.values(stylePrompts).map(style => style.name);
 
@@ -103,43 +105,51 @@ export default function ArtifyPage() {
       {/* Navigation Bar */}
       <NavBar />
       
+      {/* Mobile Helper Component - floating navigation for mobile */}
+      <MobileHelper />
+      
       {/* Hero Section - Full Screen */}
-      <section id="home" className="min-h-screen flex flex-col justify-center px-4 md:px-8 w-full bg-gradient-to-br from-background via-background/95 to-primary/5 relative overflow-hidden">
+      <section id="home" className="min-h-[90vh] md:min-h-screen flex flex-col justify-center px-4 md:px-8 w-full bg-gradient-to-br from-background via-background/95 to-primary/5 relative overflow-hidden pt-16 md:pt-0">
         {/* Background decoration */}
         <div className="absolute inset-0 overflow-hidden z-0">
-          <div className="absolute -top-[10%] -right-[10%] w-[50%] h-[40%] bg-primary/5 rounded-full blur-3xl"></div>
-          <div className="absolute top-[60%] -left-[5%] w-[30%] h-[40%] bg-accent/5 rounded-full blur-3xl"></div>
+          <div className="absolute -top-[10%] -right-[10%] w-[70%] md:w-[50%] h-[40%] bg-primary/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-[60%] -left-[5%] w-[50%] md:w-[30%] h-[40%] bg-accent/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-[20%] -left-[10%] w-[30%] h-[20%] bg-secondary/5 rounded-full blur-3xl hidden md:block"></div>
         </div>
         
-        <div className="container mx-auto max-w-6xl relative z-10 mt-16">
+        <div className="container mx-auto max-w-6xl relative z-10 py-8 md:py-0">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
-            <div className="md:w-1/2 text-center md:text-left space-y-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary/70 drop-shadow-sm">
+            <div className="md:w-1/2 text-center md:text-left space-y-4 md:space-y-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary/70 drop-shadow-sm">
                 Transform Your Photos Into Art
               </h1>
-              <p className="text-lg md:text-xl text-foreground/80 max-w-xl mx-auto md:mx-0">
+              <p className="text-base sm:text-lg md:text-xl text-foreground/80 max-w-xl mx-auto md:mx-0">
                 Unleash your creativity with Artify. Our AI-powered platform transforms your ordinary photos into stunning works of art in seconds.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start pt-2">
                 <Button 
                   size="lg" 
-                  className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 transition-all duration-300 shadow-md hover:shadow-lg"
+                  className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 transition-all duration-300 shadow-md hover:shadow-lg rounded-full"
                   onClick={() => document.getElementById('create')?.scrollIntoView({ behavior: 'smooth' })}
                 >
+                  <Wand2 className="mr-2 h-5 w-5" />
                   Try It Now
                 </Button>
                 <Button 
                   size="lg" 
                   variant="outline"
+                  className="rounded-full"
                   onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}
                 >
+                  <Image className="mr-2 h-5 w-5" />
                   View Gallery
                 </Button>
               </div>
             </div>
-            <div className="md:w-1/2 mt-8 md:mt-0">
+            <div className="md:w-1/2 mt-8 md:mt-0 w-full px-4 sm:px-10 md:px-0">
               <div className="relative max-w-md mx-auto">
-                <div className="absolute -top-4 -left-4 w-full h-full bg-primary/20 rounded-lg blur-[1px]"></div>
+                <div className="absolute -top-4 -right-4 w-full h-full bg-accent/20 rounded-lg blur-[1px] rotate-3"></div>
+                <div className="absolute -bottom-3 -left-3 w-full h-full bg-primary/20 rounded-lg blur-[1px] -rotate-2"></div>
                 <div className="relative aspect-video bg-gradient-to-tr from-primary/20 to-accent/20 rounded-lg flex items-center justify-center p-4 shadow-xl">
                   <img 
                     src="/artified-cartoon.png" 
@@ -154,7 +164,7 @@ export default function ArtifyPage() {
         </div>
         
         {/* Down arrow - positioned absolutely at the bottom */}
-        <div className="absolute bottom-8 left-0 right-0 flex justify-center">
+        <div className="absolute bottom-4 md:bottom-8 left-0 right-0 flex justify-center">
           <Button 
             variant="ghost" 
             size="icon" 
