@@ -14,7 +14,7 @@ export const stylePrompts: Record<string, StylePrompt> = {
   },
   ghibli: {
     name: 'Studio Ghibli',
-    prompt: 'Transform the given image into the Ghibli style',
+    prompt: 'Transform the given image into the Ghibli image',
   },
   // Add more styles as needed
 };

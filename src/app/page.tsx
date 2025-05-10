@@ -18,6 +18,7 @@ import NavBar from '@/components/navbar';
 import MobileHelper from '@/components/mobile-helper';
 import MobileImageViewer from '@/components/mobile-image-viewer';
 import { trackImageTransformation } from '@/utils/analytics';
+import ImageViewModal from '@/components/image-view-modal';
 
 const STYLES = Object.values(stylePrompts).map(style => style.name);
 
@@ -55,6 +56,8 @@ export default function ArtifyPage() {
   const [selectedStyle, setSelectedStyle] = useState<string>(STYLES[0]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { toast } = useToast();
+  const [uploadKey, setUploadKey] = useState(Date.now());
+  const [galleryViewImage, setGalleryViewImage] = useState<string | null>(null);
 
   useEffect(() => {
     console.log("Artify page loaded and ready.");
@@ -264,6 +267,18 @@ export default function ArtifyPage() {
               </div>
             </div>
           </div>
+          
+          {/* Note for users about waiting between style changes */}
+          <div className="mt-8 text-center">
+            <Alert variant="default" className="bg-muted/70 border-primary/20 max-w-2xl mx-auto">
+              <Info className="h-4 w-4 text-primary" />
+              <AlertTitle className="text-sm font-medium text-foreground">Helpful Tip</AlertTitle>
+              <AlertDescription className="text-xs text-muted-foreground">
+                For the best experience, we recommend waiting a few moments before transforming the same image with different styles. 
+                This allows our AI system to process each transformation properly.
+              </AlertDescription>
+            </Alert>
+          </div>
         </div>
       </section>
 
@@ -338,7 +353,8 @@ export default function ArtifyPage() {
               <div key={item.id} className="rounded-lg overflow-hidden shadow-lg bg-card/50 backdrop-blur-sm hover:shadow-xl transition-shadow duration-300">
                 <div className="grid grid-cols-2 gap-2 p-4">
                   <div className="space-y-2">
-                    <div className="aspect-square bg-muted rounded-md overflow-hidden">
+                    <div className="aspect-square bg-muted rounded-md overflow-hidden cursor-pointer" 
+                         onClick={() => setGalleryViewImage(item.original)}>
                       <img 
                         src={item.original} 
                         alt={`Original image ${index+1}`} 
@@ -349,7 +365,8 @@ export default function ArtifyPage() {
                     <p className="text-center text-sm text-muted-foreground">Original</p>
                   </div>
                   <div className="space-y-2">
-                    <div className="aspect-square bg-muted rounded-md overflow-hidden">
+                    <div className="aspect-square bg-muted rounded-md overflow-hidden cursor-pointer"
+                         onClick={() => setGalleryViewImage(item.transformed)}>
                       <img 
                         src={item.transformed} 
                         alt={`Transformed image ${index+1}`} 
@@ -374,6 +391,16 @@ export default function ArtifyPage() {
           </div>
         </div>
       </section>
+
+      {/* Image View Modal for Gallery Images */}
+      {galleryViewImage && (
+        <ImageViewModal
+          isOpen={!!galleryViewImage}
+          onClose={() => setGalleryViewImage(null)}
+          imageUrl={galleryViewImage}
+          altText="Gallery image"
+        />
+      )}
 
       {/* Contact Section */}
       <section id="contact" className="py-16 md:py-24 px-4 md:px-8 w-full">
@@ -466,6 +493,16 @@ export default function ArtifyPage() {
           <div className="mt-8 text-center text-sm text-foreground/70">
             <p>&copy; {new Date().getFullYear()} Artify. All rights reserved.</p>
             <p className="mt-1">Unleash your creativity with AI-powered art transformations.</p>
+            <p className="mt-3">
+              <a 
+                href="https://jameskaranja.netlify.app/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-primary hover:text-primary/80 transition-colors duration-300 inline-flex items-center gap-1"
+              >
+                See the Creator <span aria-hidden="true">↗</span>
+              </a>
+            </p>
           </div>
         </div>
       </footer>
