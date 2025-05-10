@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button } from './ui/button';
-import { Menu, X } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
 import { ThemeToggle } from './theme-toggle';
 import Image from 'next/image';
@@ -22,15 +22,13 @@ const NavBar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-4 md:px-8 max-w-6xl flex justify-between items-center h-16">
         <div className="flex items-center">
-          <Image 
-            src="/artify.svg" 
-            alt="Artify Logo" 
-            width={140} 
-            height={40} 
-            className="h-10 w-auto"
+          {/* Logo text fallback since the image isn't showing */}
+          <h1 
+            className="text-2xl font-bold text-primary cursor-pointer" 
             onClick={() => scrollToSection('home')}
-            style={{ cursor: 'pointer' }}
-          />
+          >
+            Artify
+          </h1>
         </div>
         
         {/* Desktop navigation */}
@@ -54,13 +52,7 @@ const NavBar = () => {
             </SheetTrigger>
             <SheetContent side="right" className="w-[250px] sm:w-[300px]">
               <div className="flex items-center mb-8 mt-4">
-                <Image 
-                  src="/artify.svg" 
-                  alt="Artify Logo" 
-                  width={120} 
-                  height={32} 
-                  className="h-8 w-auto"
-                />
+                <h2 className="text-xl font-bold text-primary">Artify</h2>
               </div>
               <nav className="flex flex-col gap-4">
                 <Button variant="ghost" onClick={() => scrollToSection('home')}>Home</Button>

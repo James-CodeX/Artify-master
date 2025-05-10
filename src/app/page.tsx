@@ -207,18 +207,10 @@ export default function ArtifyPage() {
                   </div>
                 </CardContent>
               </Card>
-              
-              <Alert className="bg-card border-primary/30 py-2">
-                <Info className="h-4 w-4 text-primary" />
-                <AlertTitle className="text-sm font-medium text-primary">Tip</AlertTitle>
-                <AlertDescription className="text-xs text-foreground/80">
-                  Experiment with different styles for unique results!
-                </AlertDescription>
-              </Alert>
             </div>
 
             {/* Image Display Column */}
-            <div className="lg:col-span-5 flex flex-col gap-6">
+            <div className="lg:col-span-5 flex flex-col">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
                 <div className="flex flex-col h-full">
                   <ImageDisplay 

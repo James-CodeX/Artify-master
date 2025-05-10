@@ -2,8 +2,7 @@
 
 import type { ChangeEvent, DragEvent } from 'react';
 import React, { useState, useCallback, useRef } from 'react';
-import Image from 'next/image';
-import { UploadCloud, Image as ImageIcon } from 'lucide-react';
+import { UploadCloud, CheckCircle, Image as ImageIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
@@ -78,11 +77,13 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUpload, previewIma
     fileInputRef.current?.click();
   };
 
+  const hasImage = !!previewImage;
+
   return (
     <Card className="w-full shadow-lg">
       <CardContent 
         className={`p-6 border-2 border-dashed rounded-lg cursor-pointer transition-colors duration-200 ease-in-out
-        ${isDragging ? 'border-primary bg-primary/10' : 'border-border hover:border-primary/70'}`}
+        ${isDragging ? 'border-primary bg-primary/10' : hasImage ? 'border-primary/30 bg-primary/5' : 'border-border hover:border-primary/70'}`}
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
         onDrop={onDrop}
@@ -100,25 +101,26 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUpload, previewIma
           ref={fileInputRef}
           id="imageUploadInput"
         />
-        {previewImage ? (
-          <div className="relative w-full aspect-square rounded-md overflow-hidden">
-            <Image
-              src={previewImage}
-              alt="Uploaded preview"
-              layout="fill"
-              objectFit="contain"
-              data-ai-hint="uploaded image"
-            />
-          </div>
-        ) : (
-          <div className="flex flex-col items-center justify-center space-y-4 h-48 text-muted-foreground">
-            <UploadCloud className="w-12 h-12 text-primary" />
-            <p className="text-center font-medium">
-              Drag &amp; drop an image here, or click to select a file.
-            </p>
-            <p className="text-sm">You can also paste an image from clipboard.</p>
-          </div>
-        )}
+        
+        <div className="flex flex-col items-center justify-center space-y-4 h-32 text-muted-foreground">
+          {hasImage ? (
+            <>
+              <CheckCircle className="w-10 h-10 text-primary" />
+              <p className="text-center font-medium text-primary">
+                Image uploaded successfully
+              </p>
+              <p className="text-sm">Click to select a different image</p>
+            </>
+          ) : (
+            <>
+              <UploadCloud className="w-10 h-10 text-primary" />
+              <p className="text-center font-medium">
+                Drag &amp; drop an image here, or click to select a file.
+              </p>
+              <p className="text-sm">You can also paste an image from clipboard.</p>
+            </>
+          )}
+        </div>
       </CardContent>
     </Card>
   );

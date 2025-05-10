@@ -13,30 +13,30 @@ interface ImageDisplayProps {
 
 const ImageDisplay: React.FC<ImageDisplayProps> = ({ imageUrl, title, isLoading = false, altText = "Displayed image" }) => {
   return (
-    <Card className="w-full shadow-md h-full">
-      <CardHeader className="pb-1 pt-3">
-        <CardTitle className="text-md font-medium text-foreground">{title}</CardTitle>
+    <Card className="w-full shadow-sm h-full">
+      <CardHeader className="pb-1 pt-2">
+        <CardTitle className="text-sm font-medium text-foreground">{title}</CardTitle>
       </CardHeader>
-      <CardContent className="pt-2">
-        <div className="w-full h-[280px] rounded-md overflow-hidden border border-border bg-muted/30 flex items-center justify-center">
+      <CardContent className="p-2">
+        <div className="w-full h-[220px] rounded-md overflow-hidden border border-border/50 bg-muted/30 flex items-center justify-center">
           {isLoading ? (
             <div className="flex flex-col items-center justify-center text-muted-foreground space-y-2">
               <Loader2 className="h-8 w-8 animate-spin text-primary" />
-              <p className="text-sm">Processing...</p>
+              <p className="text-xs">Processing...</p>
             </div>
           ) : imageUrl ? (
-            <div className="w-full h-full flex items-center justify-center p-2">
+            <div className="w-full h-full flex items-center justify-center">
               <img 
                 src={imageUrl} 
                 alt={altText} 
-                className="max-w-full max-h-full object-contain rounded"
+                className="max-w-full max-h-full object-contain" 
                 data-ai-hint="artistic photo" 
               />
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center text-muted-foreground space-y-2">
-              <ImageIcon className="h-10 w-10 opacity-30" />
-              <p className="text-sm">{title === "Original Image" ? "Upload an image" : "Transformed art will appear here"}</p>
+              <ImageIcon className="h-8 w-8 opacity-30" />
+              <p className="text-xs">{title === "Original Image" ? "Upload an image" : "Transformed art will appear here"}</p>
             </div>
           )}
         </div>
